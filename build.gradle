@@ -1,0 +1,26 @@
+allprojects {
+    ext.kotlin_version = "1.2.51"
+
+    ext.shadow_jar_version = "2.0.2"
+    ext.closure_js_compiler_version = "v20180402"
+
+    ext.junit_version = "4.12"
+    ext.logback_version = '1.2.1'
+
+    ext.kotlinx_version = "0.23.4"
+
+    ext.project_build_version = "0.1"
+
+    repositories {
+        mavenCentral()
+        jcenter()
+        google()
+        maven { url "http://dl.bintray.com/kotlin/ktor" }
+        maven { url "https://dl.bintray.com/kotlin/kotlinx" }
+    }
+}
+
+
+group 'StringCheese2'
+version project_build_version
+

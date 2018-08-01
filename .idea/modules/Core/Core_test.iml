@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="3" platform="Common (experimental) " useProjectSettings="false">
+        <compilerSettings />
+        <compilerArguments>
+          <option name="destination" value="$MODULE_DIR$/../../../Core/build/classes/kotlin/test" />
+          <option name="classpath" value="$MODULE_DIR$/../../../Core/build/classes/java/main:/Users/eightynine/GoogleDrive/Workspace/StringCheese2/Core/build/classes/kotlin/main:/Users/eightynine/GoogleDrive/Workspace/StringCheese2/Core/build/resources/main:/Users/eightynine/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test-annotations-common/1.2.51/fdd7f456a2e570bf901bad82c4bf5f51961c5fa4/kotlin-test-annotations-common-1.2.51.jar:/Users/eightynine/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test-common/1.2.51/bfc7b0999719a98b17dcdbd2212dff1d67b73e/kotlin-test-common-1.2.51.jar:/Users/eightynine/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.2.51/e4a9d4b13ab19ed1e6531fce6df98e8cfa7f7301/kotlin-stdlib-common-1.2.51.jar:/Users/eightynine/GoogleDrive/Workspace/StringCheese2/Core/build/classes/kotlin/main" />
+          <option name="moduleName" value="Core" />
+          <option name="languageVersion" value="1.2" />
+          <option name="apiVersion" value="1.2" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array />
+          </option>
+          <option name="multiPlatform" value="true" />
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+</module>
