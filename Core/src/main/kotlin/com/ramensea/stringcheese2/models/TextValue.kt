@@ -3,9 +3,9 @@ package com.ramensea.stringcheese2.models
 data class TextValue(val isTranslatable: Boolean,
                      val key: String,
                      private val text: String,
-                     private val argumentPlaceholder: String,
+                     private val argumentPlaceholder: String = "",
 
-                     val arguments: Array<Argument>?) {
+                     val arguments: Array<Argument>? = null) {
 
     fun getText(argumentWriter: ClassArgumentWriter? = null): String {
         if (numberOfArguments() == 0 || argumentWriter == null) return text

@@ -45,17 +45,17 @@ open class TranslationRunTime {
         //==================
         //Step 4 Generate output
         //==================
-        val rootOutput = generator.process(options, rootSet)
+        val rootOutput = generator.outputLanguageFile(options, rootSet)
         val outputs = Array<Output>(languageSets.size) { i ->
             val set = languageSets[i]
             if (set.languageShort == rootOutput.languageShort) return@Array rootOutput
-            generator.process(options, set)
+            generator.outputLanguageFile(options, set)
         }
 
         //==================
         //Step 5 Generate Key Class
         //==================
-        val keyOutput: Output? = if (options.outputKeyClass && generator.supportsKeyClassGeneration) generator.processKeyClass(options,rootSet) else null
+        val keyOutput: Output? = if (options.outputKeyClass && generator.supportsKeyClassGeneration) generator.outputKeyClass(options,rootSet) else null
 
         return CompleteOutput(keyOutput,rootOutput,outputs)
     }
@@ -80,6 +80,6 @@ open class TranslationRunTime {
     open fun logMissingText(options: Options, targetSet: LanguageTextValueSet, missingTextValue: TextValue) {
         targetSet.alertInfo.append("--${targetSet.languageShort.capitalize()} translation set is missing key: ${missingTextValue.key}.\n")
         if (options.fillInMissingStrings) targetSet.alertInfo.append("String cheese filled ${targetSet.languageShort.capitalize()}'s" +
-                " translation set with value:\"${if (options.fillInMissingStringsInBlank) "" else missingTextValue.text}\"\n\n")
+                " translation set with value:\"${if (options.fillInMissingStringsInBlank) "" else missingTextValue.getText()}\"\n\n")
     }
 }

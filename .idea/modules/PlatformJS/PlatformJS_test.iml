@@ -3,6 +3,7 @@
   <component name="FacetManager">
     <facet type="kotlin-language" name="Kotlin">
       <configuration version="3" platform="JavaScript " useProjectSettings="false">
+        <implements>Core_test</implements>
         <productionOutputPath>$MODULE_DIR$/../../../PlatformJS/build/classes/kotlin/main/PlatformJS.js</productionOutputPath>
         <compilerSettings />
         <compilerArguments>

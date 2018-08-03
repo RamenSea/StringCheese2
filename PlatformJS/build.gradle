@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    expectedBy project(":Core")
     compile "org.jetbrains.kotlin:kotlin-stdlib-js"
     testCompile "org.jetbrains.kotlin:kotlin-test-js"
 }

@@ -4,6 +4,7 @@ import com.ramensea.stringcheese2.models.*
 import com.ramensea.stringcheese2.process.interfaces.TextTranslationGenerator
 
 class CocoaTouchGenerator: TextTranslationGenerator {
+    override val supportsLanguageFile: Boolean = true
     override val supportsKeyClassGeneration: Boolean = true
     private val classArguments = CocoaTouchKeyClassArguments()
 
@@ -15,23 +16,27 @@ class CocoaTouchGenerator: TextTranslationGenerator {
         })
     }
 
-    fun translateKeyToClassMethod(key: String): String {
+    override fun translateKeyToClassMethod(key: String): String {
         return translateKey(key).replace("_.".toRegex(), { matchResult ->
             matchResult.value.substring(1).toUpperCase()
         })
     }
 
 
-    override fun process(options: Options, languageSet: LanguageTextValueSet): Output {
+    override fun outputLanguageFile(options: Options, languageSet: LanguageTextValueSet): Output {
         val builder = StringBuilder()
         builder.append("//String Cheese generated at:${options.timeStamp}\n\n")
         for (tv in languageSet.textValues) {
-            builder.append("\"${translateKey(tv.key)}\" = \"${tv.getText(classArguments)}\"")
+            builder.append(generateLanguageFileLine(options, tv))
         }
         return GeneralOutput(options.outputPlatform, languageSet.languageShort, builder.toString(), false)
     }
 
-    override fun processKeyClass(options: Options, rootSet: LanguageTextValueSet): Output {
+    override fun generateLanguageFileLine(options: Options, value: TextValue): String {
+        return "\"${translateKey(value.key)}\" = \"${value.getText(classArguments)}\";\n"
+    }
+
+    override fun outputKeyClass(options: Options, rootSet: LanguageTextValueSet): Output {
         val builder = StringBuilder()
         builder.append("//String Cheese generated at:${options.timeStamp}\n" +
                 "import Foundation\n" +
@@ -43,34 +48,39 @@ class CocoaTouchGenerator: TextTranslationGenerator {
                 "\n")
 
         for (textValue in rootSet.textValues) {
-            val methodName = translateKeyToClassMethod(textValue.key)
-            if (!textValue.hasArguments() && textValue.arguments != null) {
-                if (textValue.isTranslatable) {
-                    builder.append("\tlet raw_$methodName: String {\n" +
-                            "\t\treturn localize(\"$methodName\")\n" +
-                            "\t}\n")
-                } else {
-                    builder.append("\tlet raw_$methodName: String = \"${textValue.getArgumentString(classArguments)}\"")
-                }
-                builder.append("\tfunc $methodName(${classArguments.getArgumentList(textValue.arguments)}) -> String {\n" +
-                        "\t\treturn String(format: raw_$methodName, ${classArguments.getArgumentList(textValue.arguments)})" +
-                        "\t}")
-            } else {
-                if (textValue.isTranslatable) {
-                    builder.append("\tlet $methodName: String {\n" +
-                            "\t\treturn localize(\"${textValue.getText()}\")\n" +
-                            "\t}\n")
-                } else {
-                    builder.append("\tlet $methodName: String = \"${textValue.getText()}\"")
-                }
-            }
+            builder.append(generateKeyClassMethod(options,textValue))
         }
 
         return GeneralOutput(options.outputPlatform,"",builder.toString(),true)
     }
 
+    override fun generateKeyClassMethod(options: Options, value: TextValue): String {
+        val methodName = translateKeyToClassMethod(value.key)
+        if (!value.hasArguments() && value.arguments != null) {
+            var s: String
+            if (value.isTranslatable) {
+                s = "\tlet raw_$methodName: String {\n" +
+                        "\t\treturn localize(\"$methodName\")\n" +
+                        "\t}\n"
+            } else {
+                s = "\tlet raw_$methodName: String = \"${value.getArgumentString(classArguments)}\""
+            }
+            s += "\tfunc $methodName(${classArguments.getArgumentList(value.arguments)}) -> String {\n" +
+                    "\t\treturn String(format: raw_$methodName, ${classArguments.getArgumentList(value.arguments)})" +
+                    "\t}"
+            return s
+        } else {
+            if (value.isTranslatable) {
+                return "\tlet $methodName: String {\n" +
+                        "\t\treturn localize(\"${translateKey(value.key)}\")\n" +
+                        "\t}\n"
+            } else {
+                return "\tlet $methodName: String = \"${value.getText()}\""
+            }
+        }
+    }
+
     data class CocoaOptions(override val timeStamp: String,
-                              override val outputPlatform: String,
                               override val rootLanguageId: String,
 
                               override val alertForMissingTexts: Boolean,
@@ -81,6 +91,8 @@ class CocoaTouchGenerator: TextTranslationGenerator {
 
                               override val outputKeyClass: Boolean,
                               override val keyClassName: String) : Options {
+
+        override val outputPlatform: String = "Cocoa"
     }
 }
 
