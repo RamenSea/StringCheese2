@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="Core_main" target="1.8" />
+      <module name="Core_test" target="1.8" />
+      <module name="PlatformJS_main" target="1.8" />
+      <module name="PlatformJS_test" target="1.8" />
+      <module name="PlatformJVM_main" target="1.8" />
+      <module name="PlatformJVM_test" target="1.8" />
+      <module name="StringCheese-CLI_main" target="1.8" />
+      <module name="StringCheese-CLI_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

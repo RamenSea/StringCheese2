@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="3" platform="JavaScript " useProjectSettings="false">
+        <implements>StringCheese-Common_main</implements>
+        <testOutputPath>$MODULE_DIR$/../../../StringCheese-JS/build/classes/kotlin/test/StringCheese-JS_test.js</testOutputPath>
+        <compilerSettings>
+          <option name="additionalArguments" value="-main main" />
+        </compilerSettings>
+        <compilerArguments>
+          <option name="outputFile" value="$MODULE_DIR$/../../../StringCheese-JS/web/build/StringCheese.js" />
+          <option name="noStdlib" value="true" />
+          <option name="sourceMap" value="true" />
+          <option name="metaInfo" value="true" />
+          <option name="target" value="v5" />
+          <option name="moduleKind" value="umd" />
+          <option name="languageVersion" value="1.2" />
+          <option name="apiVersion" value="1.2" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array />
+          </option>
+          <option name="multiPlatform" value="true" />
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+</module>
